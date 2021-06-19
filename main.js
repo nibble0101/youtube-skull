@@ -5,6 +5,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 600,
     height: 400,
+    icon: path.join(__dirname, "public", "video-icon.png"),
     webPreferences: {
       nodeIntegration: true,
     },
@@ -12,7 +13,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "public", "index.html"));
 
   //   Open DevTools for debugging
-  //   mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
