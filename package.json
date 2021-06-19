@@ -1,0 +1,28 @@
+{
+  "name": "youtube-skull",
+  "version": "0.0.0",
+  "description": "A simple desktop app for downloading audios and videos from youtube",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nibble0101/youtube-skull.git"
+  },
+  "keywords": [
+    "Youtube downloader",
+    "Video downloader",
+    "Audio downloader"
+  ],
+  "author": "Joseph Mawa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nibble0101/youtube-skull/issues"
+  },
+  "homepage": "https://github.com/nibble0101/youtube-skull#readme",
+  "devDependencies": {
+    "electron": "^13.1.2"
+  }
+}
