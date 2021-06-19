@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Youtube skull</title>
-</head>
-<body>
-    <h1> Hello World! </h1>
+  </head>
+  <body class="body">
+    <section>
+      <p>  <button>Video</button> <button>Audio</button></p>
+    </section>
+    <section>
+        <form>
+            <label for="url">Enter URL</label>
+            <input type="text" id="url" required  >
+            <input type="submit" value="Download" >
+        </form>
+    </section>
     <script src="./index.js"></script>
-</body>
+  </body>
 </html>
