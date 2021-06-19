@@ -1,9 +1,15 @@
 const form = document.getElementById("form");
-const url = document.getElementById("url");
+
+function clearUrlInput(){
+  const url = document.getElementById("url");
+  url.value = "";
+}
+
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  if(url.value){
-    alert("Please enter correct url");
+  const url = document.getElementById("url");
+  if(!url.value.trim()){
+    alert("Please enter correct URL");
   }
 });
