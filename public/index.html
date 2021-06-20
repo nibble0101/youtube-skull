@@ -16,14 +16,16 @@
   <body class="body">
     <section>
       <p>
-        <button class="btn btn--video" title="video">Video</button>
-        <button class="btn btn--video" title="Audio">Audio</button>
+        <button class="btn active--btn" id="video-btn" title="video">Video</button>
+        <button class="btn" id="audio-btn" title="Audio">
+          Audio
+        </button>
       </p>
     </section>
     <section>
       <form id="form" class="form">
         <label for="url">Enter URL</label>
-        <input type="text" id="url" required />
+        <input type="text" id="url" />
         <input type="submit" value="Download" />
       </form>
     </section>
