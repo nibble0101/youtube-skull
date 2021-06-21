@@ -6,10 +6,9 @@ const os = require("os");
 const path = require("path");
 const { ipcRenderer } = require("electron");
 
-const downloadProgress = document.getElementById("download-progress");
-const body = document.querySelector(".body");
-const successMessage = "<p> Download successfull </p>";
-const test = document.getElementById("test");
+const progressElement = document.getElementById("download-progress");
+const rootElement = document.getElementById("root");
+const progresPercent = document.getElementById("progress-percent");
 
 function getDirPath() {
   const dirPath = path.join(os.homedir(), "Downloads", "youtubeSkull");
@@ -62,14 +61,19 @@ async function downloadVideo(url) {
     writeStream.write(chunk);
   });
   readStream.on("progress", (...args) => {
-    downloadProgress.setAttribute("value", `${getDownloadProgress(args)}`);
+    const downloadProgress = getDownloadProgress(args);
+    progressElement.setAttribute("value", `${downloadProgress}`);
+    progresPercent.innerText = `${downloadProgress}%`;
   });
   readStream.on("end", () => {
-    body.innerHTML = successMessage;
+    rootElement.innerHTML = "<p> Download successfull </p>";
   });
 }
 
-
 ipcRenderer.on("download-url", (event, url) => {
+  if (!ytdl.validateURL(url)) {
+    rootElement.innerHTML = "<p> Invalid URL </p>";
+    return;
+  }
   downloadVideo(url);
 });
