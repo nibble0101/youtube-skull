@@ -1,14 +1,21 @@
+:root {
+  --light-gray: #d3d3d3;
+  --dark-gray: #a9a9a9;
+  --gray: #808080;
+}
+
 .body {
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--light-gray);
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.btn{
-    background-color: #f6f6f6;
-    border: 1px solid grey;
+.btn {
+  background-color: #f6f6f6;
+  border: 1px solid grey;
 }
-.active--btn{
-   background-color: honeydew;
+.active--btn {
+  background-color: honeydew;
 }
