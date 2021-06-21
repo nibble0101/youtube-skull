@@ -3,6 +3,10 @@ const path = require("path");
 
 let mainWindow;
 
+/**
+ * Create main window
+ */
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 600,
@@ -17,6 +21,15 @@ function createWindow() {
   //   Open DevTools for debugging
   // mainWindow.webContents.openDevTools()
 }
+
+/**
+ * Create Modal
+ * @param {number} width 
+ * @param {number} height 
+ * @param {BrowserWindow} parent 
+ * @param {string} title 
+ * @param {string} winPath 
+ */
 
 function addWindow(width, height, parent, title, winPath) {
   let newWindow = new BrowserWindow({
@@ -34,6 +47,10 @@ function addWindow(width, height, parent, title, winPath) {
   });
 }
 
+/**
+ * Create main window when app is ready
+ */
+
 app.whenReady().then(() => {
   createWindow();
 });
@@ -44,13 +61,17 @@ app.on("activate", () => {
   }
 });
 
+/**
+ * Exit app when all windows are closed except in macOS
+ */
+
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.exit();
   }
 });
 
-// Creating menu
+// Create main menu
 
 const menuTemplate = [
   {
