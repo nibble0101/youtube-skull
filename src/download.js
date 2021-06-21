@@ -4,6 +4,12 @@ const fs = require("fs");
 const ytdl = require("ytdl-core");
 const os = require("os");
 const path = require("path");
+const { ipcRenderer } = require("electron");
+
+const downloadProgress = document.getElementById("download-progress");
+const body = document.querySelector(".body");
+const successMessage = "<p> Download successfull </p>";
+const test = document.getElementById("test");
 
 function getDirPath() {
   const dirPath = path.join(os.homedir(), "Downloads", "youtubeSkull");
@@ -37,7 +43,7 @@ async function getVideoInfo(url) {
 }
 
 function getDownloadProgress(progressArr) {
-  return `${Math.floor((progressArr[1] / progressArr[2]) * 100)}%`;
+  return `${Math.floor((progressArr[1] / progressArr[2]) * 100)}`;
 }
 
 async function downloadVideo(url) {
@@ -45,7 +51,7 @@ async function downloadVideo(url) {
   const dirPath = getDirPath();
   const dirCreated = await createDir(dirPath);
   const fileName = getFileName(videoInfo.videoDetails.title);
-  const filePath =  path.join(dirPath, `${fileName}.mp4`);
+  const filePath = path.join(dirPath, `${fileName}.mp4`);
   if (!dirCreated) {
     throw new Error("An error has occurred");
   }
@@ -56,13 +62,14 @@ async function downloadVideo(url) {
     writeStream.write(chunk);
   });
   readStream.on("progress", (...args) => {
-    console.log(`Progress: ${getDownloadProgress(args)} `);
+    downloadProgress.setAttribute("value", `${getDownloadProgress(args)}`);
   });
   readStream.on("end", () => {
-    console.log("Download ended");
+    body.innerHTML = successMessage;
   });
 }
 
 
-
-// downloadVideo(msaani);
+ipcRenderer.on("download-url", (event, url) => {
+  downloadVideo(url);
+});

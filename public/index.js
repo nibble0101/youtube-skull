@@ -1,3 +1,5 @@
+const  { ipcRenderer } = require("electron");
+
 const form = document.getElementById("form");
 const videoBtn = document.getElementById("video-btn");
 const audioBtn = document.getElementById("audio-btn");
@@ -34,5 +36,7 @@ form.addEventListener("submit", (event) => {
   const url = document.getElementById("url");
   if (!url.value.trim()) {
     alert("Please enter valid URL");
+    return;
   }
+  ipcRenderer.send("start-download", url.value.trim());
 });

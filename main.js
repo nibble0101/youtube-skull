@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const path = require("path");
 
 let mainWindow;
@@ -14,12 +14,13 @@ function createWindow() {
     icon: path.join(__dirname, "public", "video-icon.png"),
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false
     },
   });
   mainWindow.loadFile(path.join(__dirname, "public", "index.html"));
 
   //   Open DevTools for debugging
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 /**
@@ -70,6 +71,31 @@ app.on("window-all-closed", () => {
     app.exit();
   }
 });
+
+ipcMain.on("start-download", (event, url) => {
+  
+  let modalWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    frame: true,
+    parent: mainWindow,
+    modal: true,
+    autoHideMenuBar: true,
+    webPreferences:{
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  })
+  modalWindow.loadFile(path.join(__dirname, "windows", "download.html"));
+  modalWindow.webContents.on("did-finish-load", () => {
+    modalWindow.webContents.send("download-url", url);
+  })
+  modalWindow.on("closed", () => {
+    modalWindow = null;
+  })
+  modalWindow.webContents.openDevTools();
+  // console.log(url);
+})
 
 // Create main menu
 
