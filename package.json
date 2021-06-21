@@ -24,5 +24,8 @@
   "homepage": "https://github.com/nibble0101/youtube-skull#readme",
   "devDependencies": {
     "electron": "^13.1.2"
+  },
+  "dependencies": {
+    "ytdl-core": "^4.8.2"
   }
 }
