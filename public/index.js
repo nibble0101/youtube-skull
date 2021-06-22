@@ -1,4 +1,5 @@
 const  { ipcRenderer } = require("electron");
+const { validateURL } = require("ytdl-core");
 
 const form = document.getElementById("form");
 const videoBtn = document.getElementById("video-btn");
@@ -33,10 +34,11 @@ audioBtn.addEventListener("click", () => {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const url = document.getElementById("url");
-  if (!url.value.trim()) {
-    alert("Please enter valid URL");
+  const { value } = document.getElementById("url");
+
+  if (!value.trim() || !validateURL(value.trim())) {
+    alert("Please enter valid Youtube URL");
     return;
   }
-  ipcRenderer.send("start-download", url.value.trim());
+  ipcRenderer.send("start-download", value.trim());
 });

@@ -31,10 +31,6 @@ async function createDir(dirPath) {
   }
 }
 
-function validateURL(url) {
-  const isValidUrl = ytdl.validateURL(url);
-  return isValidUrl;
-}
 
 async function getVideoInfo(url) {
   const options = await ytdl.getInfo(url);
@@ -71,9 +67,5 @@ async function downloadVideo(url) {
 }
 
 ipcRenderer.on("download-url", (event, url) => {
-  if (!ytdl.validateURL(url)) {
-    rootElement.innerHTML = "<p> Invalid URL </p>";
-    return;
-  }
   downloadVideo(url);
 });
