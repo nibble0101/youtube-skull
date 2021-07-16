@@ -40,5 +40,6 @@ form.addEventListener("submit", (event) => {
     alert("Please enter valid Youtube URL");
     return;
   }
-  ipcRenderer.send("start-download", value.trim());
+  const userSelection = downloadVideo ? "video" : "audio"
+  ipcRenderer.send("start-download", value.trim(), userSelection);
 });

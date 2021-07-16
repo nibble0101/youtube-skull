@@ -73,7 +73,7 @@ app.on("window-all-closed", () => {
   }
 });
 
-ipcMain.on("start-download", (event, url) => {
+ipcMain.on("start-download", (event, url, userSelection) => {
    
   let modalWindow = new BrowserWindow({
     width: 600,
@@ -89,13 +89,12 @@ ipcMain.on("start-download", (event, url) => {
   })
   modalWindow.loadFile(path.join(__dirname, "windows", "download.html"));
   modalWindow.webContents.on("did-finish-load", () => {
-    modalWindow.webContents.send("download-url", url);
+    modalWindow.webContents.send("download-url", url, userSelection);
   })
   modalWindow.on("closed", () => {
     modalWindow = null;
   })
   modalWindow.webContents.openDevTools();
-  // console.log(url);
 })
 
 // Create main menu
